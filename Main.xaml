@@ -51,11 +51,7 @@
   <Sequence DisplayName="Vending Machine" sap:VirtualizedContainerService.HintSize="241.6,145.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Name="creditFinal" />
-      <Variable x:TypeArguments="x:Int32" Name="drinkValue">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:Int32" />
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:Int32" Default="0" Name="drinkValue" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -125,9 +121,7 @@
                 <x:Int32 x:Key="DestConnectionPointIndex">49</x:Int32>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Transition.Condition>
-              <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="yesOrNo.Equals(&quot;Yes&quot;)" />
-            </Transition.Condition>
+            <Transition.Condition>[yesOrNo.Equals("Yes")]</Transition.Condition>
             <Transition.To>
               <State x:Name="__ReferenceID0" DisplayName="Choose the drink" sap:VirtualizedContainerService.HintSize="133.6,61.6" sap2010:WorkflowViewState.IdRef="State_2">
                 <State.Entry>
@@ -145,7 +139,7 @@
                         <OutArgument x:TypeArguments="x:String">[drinkChoice]</OutArgument>
                       </ui:InputDialog.Result>
                     </ui:InputDialog>
-                    <If Condition="[drinkChoice.Equals(&quot;Coffee ($3)&quot;)]" sap:VirtualizedContainerService.HintSize="568.8,219.2" sap2010:WorkflowViewState.IdRef="If_3">
+                    <If Condition="[drinkChoice.Equals(&quot;Coffee ($3)&quot;)]" DisplayName="Find the cost of the chosen drink" sap:VirtualizedContainerService.HintSize="568.8,219.2" sap2010:WorkflowViewState.IdRef="If_3">
                       <If.Then>
                         <Assign sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_4">
                           <Assign.To>
@@ -186,9 +180,7 @@
                         <x:Int32 x:Key="DestConnectionPointIndex">40</x:Int32>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <Transition.Condition>
-                      <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="creditFinal&gt;=drinkValue" />
-                    </Transition.Condition>
+                    <Transition.Condition>[creditFinal&gt;=drinkValue]</Transition.Condition>
                     <Transition.To>
                       <State x:Name="__ReferenceID2" DisplayName="Vend the drink and provide the balance" sap:VirtualizedContainerService.HintSize="133.6,61.6" sap2010:WorkflowViewState.IdRef="State_4">
                         <State.Entry>
@@ -229,9 +221,7 @@
                             <Transition.To>
                               <x:Reference>__ReferenceID0</x:Reference>
                             </Transition.To>
-                            <Transition.Condition>
-                              <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="anotherDrink.Equals(&quot;Yes&quot;)" />
-                            </Transition.Condition>
+                            <Transition.Condition>[anotherDrink.Equals("Yes")]</Transition.Condition>
                           </Transition>
                           <Transition DisplayName="Another drink?" sap:VirtualizedContainerService.HintSize="448.8,509.6" sap2010:WorkflowViewState.IdRef="Transition_8">
                             <sap:WorkflowViewStateService.ViewState>
@@ -241,9 +231,7 @@
                                 <x:Int32 x:Key="DestConnectionPointIndex">38</x:Int32>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <Transition.Condition>
-                              <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="anotherDrink.Equals(&quot;No&quot;)" />
-                            </Transition.Condition>
+                            <Transition.Condition>[anotherDrink.Equals("No")]</Transition.Condition>
                             <Transition.To>
                               <State x:Name="__ReferenceID1" DisplayName="Final State" sap:VirtualizedContainerService.HintSize="133.6,61.6" sap2010:WorkflowViewState.IdRef="State_3" IsFinal="True">
                                 <State.Entry>
@@ -277,9 +265,7 @@
                     <Transition.Action>
                       <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;You don't have enough balance. Please add more credit.&quot;]" />
                     </Transition.Action>
-                    <Transition.Condition>
-                      <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="creditFinal&lt;drinkValue" />
-                    </Transition.Condition>
+                    <Transition.Condition>[creditFinal&lt;drinkValue]</Transition.Condition>
                   </Transition>
                 </State.Transitions>
               </State>
@@ -296,9 +282,7 @@
             <Transition.To>
               <x:Reference>__ReferenceID1</x:Reference>
             </Transition.To>
-            <Transition.Condition>
-              <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="yesOrNo.Equals(&quot;No&quot;)" />
-            </Transition.Condition>
+            <Transition.Condition>[yesOrNo.Equals("No")]</Transition.Condition>
           </Transition>
         </State.Transitions>
         <State.Variables>
